@@ -1,0 +1,135 @@
+html {
+    background-color: #000000;
+}
+
+.loaded_style {
+    background-color: #FF4800;
+}
+
+body {
+	overflow: hidden;
+    min-width: 780px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a {
+    color: #f36926;
+}
+#sideMenu {
+    /*width: 200px !important;*/
+}
+
+#main_content {
+	height: 100%;
+	width: calc(100% - 150px);
+	overflow-y: auto;
+}
+
+#main_window {
+    margin-top: 0px !important;
+    border-radius: 0px;
+    border: 0px solid transparent;
+    display: none;
+}
+
+#progLabel {
+    margin-top: 1rem !important;
+}
+
+#loadProg {
+    margin-bottom: 0.5rem !important;
+}
+
+.str_input {
+    min-width: 280px;
+}
+
+.ui_pane {
+	display: none;
+}
+
+.ui_input {
+	margin-bottom: 0.5em;
+}
+
+.multi_input {
+  margin-top: 0.4em;
+  width: 100%;
+}
+
+.multi_input_text {
+	width: 100%;
+}
+
+.ui.styled.accordion {
+  width: 100%;
+}
+
+.ui.segment {
+	margin-top:0.5rem;
+	margin-bottom:0;
+}
+
+.params_box {
+	margin-top: 0.5rem;
+}
+
+.nud_btns {
+	margin-left: 10px;
+}
+
+.scroll_feed {
+}
+
+#menuBtns {
+	margin: 0.5rem;
+}
+
+#serverConfig {
+	padding: 0.5rem;
+}
+
+#serverConfigBtns {
+	padding: 0.5rem;
+}
+
+.paramCombo {
+	display:inline-block
+}
+
+.ui.icon.button>.icon, .ui.icon.buttons .button>.icon {
+	vertical-align: middle;
+}
+
+#loadPresetList {
+	max-height: 400px;
+	overflow-y: auto;
+}
+
+.param_loader {
+	margin-bottom: 1rem;
+}
+
+#saveQueueEdit {
+	display: none;
+}
+
+.grabber{
+	cursor: move;
+}
+
+.sort_placeholder {
+    height: 38px;
+    width: 100%;
+}
+
+#queueHeader {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+.largeFont {
+    font-size: 1.8em;
+}

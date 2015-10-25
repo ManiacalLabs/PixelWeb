@@ -1,0 +1,111 @@
+#! /usr/bin/env python
+
+import inspect
+
+from bibliopixel import *
+from bibliopixel.animation import *
+import matrix_animations as ma
+import pixelweb.loader
+from pixelweb.util import d
+# import config
+import os, sys
+import json
+
+def animationPredicate(obj):
+    if not inspect.isclass(obj): return False
+    return issubclass(obj, BaseAnimation)
+
+def loadClasses(mod):
+    results = []
+    for name, obj in inspect.getmembers(mod, predicate=animationPredicate):
+        if obj.__module__ == mod.__name__:
+            results.append(d({"name":name, "cls":obj}))
+    return results
+
+def loadParams(cls):
+    spec = inspect.getargspec(cls.__init__)
+    args = list(reversed(spec.args))
+    defaults = spec.defaults
+    if not defaults: defaults = []
+    defaults = list(reversed(list(defaults)))
+    result = []
+    count = 0
+    for a in args:
+        if a not in ["self", "led"]:
+            d = None
+            dtype = ""
+            if count < len(defaults):
+                d = defaults[count]
+                if type(d) is int:
+                    dtype = "int"
+                elif type(d) is bool:
+                    dtype = "bool"
+                elif type(d) is str:
+                    dtype = "str"
+                elif (type(d) is list or type(d) is tuple) and len(d) == 3:
+                    dtype = "color"
+            i = {
+                "id": a,
+                "label": "",
+                "type": dtype,
+                "default": d,
+                "help":""
+            }
+            result.append(i)
+        count += 1
+        result = result[::-1]
+    return result
+
+def getControllerType(cls):
+    if issubclass(cls, BaseMatrixAnim): return "matrix"
+    if issubclass(cls, BaseStripAnim): return "strip"
+    if issubclass(cls, BaseCircleAnim): return "circle"
+    return ""
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print "Must supply a file to process!"
+    else:
+        files = sys.argv[1:]
+        cwd = os.getcwdu()
+        for f in files:
+            if not os.path.isabs(f):
+                f = os.path.join(cwd, f)
+            if not os.path.exists(f):
+                print "File does not exist! - {}".format(f)
+                continue
+            print "Loading: {}".format(f)
+            mod = loader.load_module(f)[1]
+            if hasattr(mod, "MANIFEST"):
+                print "Module already contains manifest. Skipping..."
+                continue
+
+            results = []
+            clist = loadClasses(mod)
+            for c in clist:
+                params = loadParams(c.cls)
+                manifest = {
+                    "id": c.name,
+                    "class": "##" + c.name,
+                    "type": "animation",
+                    "display": c.name,
+                    "desc": None,
+                    "controller": getControllerType(c.cls),
+                    "params": params
+                }
+                results.append(manifest)
+            if len(results) > 0:
+                manifest = json.dumps(results, indent=4, sort_keys=True)
+                for c in clist:
+                    manifest = manifest.replace('"##' + c.name + '"', c.name)
+                manifest = manifest.replace(": null", ": None")
+                manifest = manifest.replace(": false", ": False")
+                manifest = manifest.replace(": true", ": True")
+                manifest = "\n\n\nMANIFEST = " + manifest
+                with open(f, "a") as fp:
+                    print "Writing manifest..."
+                    fp.write(manifest)
+            else:
+                print "No valid animations to parse..."
+
+        print "\nComplete! Please fill in the rest of the manifest manually."

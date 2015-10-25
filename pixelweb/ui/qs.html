@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <title>PixelWeb</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="/semantic/semantic.min.css">
+    <link rel="stylesheet" href="/css/qs.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/semantic/semantic.min.js"></script>
+    <script src="/js/loglevel.min.js"></script>
+    <script src="/js/core.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/api.calls.js"></script>
+    <script src="/js/qs.js"></script>
+</head>
+
+<body>
+    <h1 class="ui white inverted center aligned header" id="header"></h1>
+    <div class="ui" id="button_list">
+        <button class="fluid ui massive red labeled icon button btn" id="btnStop">
+            <i class="stop icon"></i>
+            Stop
+        </button>
+    </div>
+    <div class="ui basic small modal" id="BPError">
+        <div class="header">QuickSelect Error</div>
+        <div class="image content">
+            <img class="image"><i class="huge red warning sign icon"></i></img>
+            <p class="" id="bpErrorMsg"></p>
+        </div>
+        <div class="actions">
+            <div class="ui approve green button">OK</div>
+        </div>
+    </div>
+</body>
+
+</html>

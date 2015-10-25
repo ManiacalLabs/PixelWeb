@@ -1,0 +1,337 @@
+<html>
+
+<head>
+    <title>PixelWeb</title>
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes" /> -->
+    <link rel="stylesheet" href="/semantic/semantic.min.css">
+    <link rel="stylesheet" href="/css/spectrum.css">
+    <link rel="stylesheet" href="/css/ui.css">
+    <link rel="stylesheet" href="/css/jquery-ui.min.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <script src="/semantic/semantic.min.js"></script>
+    <script src="/js/spectrum.js"></script>
+    <script src="/js/loglevel.min.js"></script>
+    <script src="/js/core.js"></script>
+    <script src="/js/ui.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/api.calls.js"></script>
+    <script src="/js/controls.js"></script>
+    <script src="/js/main.js"></script>
+</head>
+
+<body>
+    <div class="ui basic modal inverted" id="load_modal">
+        <img class="ui image" src="/img/PixelWebLogo_Large.png">
+        <!-- <div class="ui center aligned header">Initializing PixelWeb</div> -->
+        <div class="content">
+            <div class="ui inverted indicating large progress" id="loadProg">
+                <div class="bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+            <div class="ui center aligned inverted header" id="progLabel">Loading...</div>
+        </div>
+    </div>
+
+    <div class="ui top attached segment pushable" id="main_window">
+        <div class="ui visible left vertical inverted thin sidebar menu" id="sideMenu">
+            <a class="side_menu item" id="mnuAbout">
+                <img class="ui small image" src="/img/PixelWebLogo_Small.png">
+            </a>
+            <a class="side_menu item" id="mnuAnim">
+                <i class="play icon"></i> Animations
+            </a>
+            <a class="side_menu item" id="mnuQueue">
+                <i class="film icon"></i> Queue
+                <div class="ui hidden green label" id="queueCount"></div>
+            </a>
+            <a class="side_menu item" id="mnuQS">
+                <i class="lightning icon"></i> QS
+                <div class="ui hidden green label" id="qsCount"></div>
+            </a>
+            <a class="side_menu item" id="mnuConfig">
+                <i class="configure icon"></i> Output Setup
+            </a>
+            <a class="side_menu item" id="mnuServer">
+                <i class="laptop icon"></i> App Config
+            </a>
+            <a class="side_menu item" id="mnuConsole">
+                <i class="terminal icon"></i> Console
+            </a>
+        </div>
+
+        <div class="pusher" id="main_content">
+            <div class="ui basic segment ui_pane" id="paneAbout">
+                <img class="ui huge centered image" src="/img/PixelWebLogo_Large.png">
+                <p class="ui basic center aligned segment largeFont">v1.0.0 beta</p>
+                <p class="ui basic center aligned segment largeFont">Thank you for choosing PixelWeb!</p>
+                <p class="ui basic center aligned segment largeFont">PixelWeb is Open Source, under the MIT License and provided free of charge to all. If you paid for this software, please contact Maniacal Labs via <a href="mailto:contact@maniacallabs.com">contact@maniacallabs.com</a> to report the license violation.</p>
+                <p class="ui basic center aligned segment largeFont"></p>
+                <p class="ui basic center aligned segment largeFont">For more details on PixelWeb usage, please visit the <a href="http://github.com/maniacallabs/PixelWeb/wiki">PixelWeb Wiki</a>.</p>
+                <p class="ui basic center aligned segment largeFont">PixelWeb &copy; 2015 - <a href="http://maniacallabs.com">Maniacal Labs</a> / Adam Haile</p>
+
+            </div>
+
+            <div class="ui basic segment ui_pane" id="paneAnim">
+                <div class="ui large header">Animations</div>
+                <div id="anims"></div>
+                <div class="ui hidden divider short"></div>
+                <div class="ui green button" id="saveQSAnimEdit">Save</div>
+                <div class="ui green button" id="saveQueueEdit">Save</div>
+                <div class="ui red button" id="cancelAnimEdit">Cancel</div>
+                <div class="ui disabled button green" id="startAnim">Start</div>
+                <div class="ui button red" id="stopAnim">Stop</div>
+                <button class="ui labeled icon button" id="addQueue">
+                    <i class="film icon"></i>
+                    Add to Queue
+                </button>
+                <button class="ui labeled icon button" id="addQSAnim">
+                    <i class="lightning icon"></i>
+                    Add to QS
+                </button>
+            </div>
+
+            <div class="ui basic segment ui_pane" id="paneQueue">
+                <div class="ui grid">
+                    <div class="ui fluid large header five wide column" id="queueHeader">Queue</div>
+                    <div class="right aligned eleven wide column">
+                        <div class="paramCombo" id="queueCombo"></div>
+                        <div class="ui icon buttons">
+                            <button class="ui disabled compact icon button" id="queue_save"><i class="save icon"></i></button>
+                            <button class="ui disabled compact icon button" id="queue_delete"><i class="trash icon"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui list" id="queueList">
+                </div>
+
+                <div class="ui green button" id="saveQSQueueEdit">Save</div>
+                <div class="ui red button" id="cancelQSQueueEdit">Cancel</div>
+                <button class='ui green button' id="startQ">Start</button>
+                <button class='ui red button' id="stopQ">Stop</button>
+                <button class="ui labeled icon button" id="addQSQueue">
+                    <i class="lightning icon"></i>
+                    Add to QS
+                </button>
+
+            </div>
+
+            <div class="ui basic segment ui_pane" id="paneQS">
+                <div class="ui grid">
+                    <div class="ui fluid large header five wide column" id="qsHeader">Quick Select</div>
+                    <div class="right aligned eleven wide column">
+                        <div class="paramCombo" id="qsCombo"></div>
+                        <div class="ui icon buttons">
+                            <button class="ui disabled compact icon button" id="qs_save"><i class="save icon"></i></button>
+                            <button class="ui disabled compact icon button" id="qs_delete"><i class="trash icon"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui list" id="qsList">
+                </div>
+
+                <button class="ui disabled labeled icon button" id="launchQS">
+                    <i class="rocket icon"></i>
+                    Launch QS Page
+                </button>
+
+            </div>
+
+            <div class="ui basic segment ui_pane" id="paneConfig">
+                <div class="ui large header">Output Setup</div>
+                <div id="driver"></div>
+                <div class="ui icon buttons">
+                    <button class="ui button" id="btnAddDriver"><i class="green plus icon"></i></button>
+                    <button class="ui button disabled" id="btnRemoveDriver"><i class="red minus icon"></i></button>
+                </div>
+                <div class="ui hidden divider short"></div>
+                <div id="controller"></div>
+                <div class="ui hidden divider short"></div>
+                <div class="ui button green" id="startDriver">Start</div>
+            </div>
+
+            <div class="ui basic segment ui_pane" id="paneServer">
+                <div class="ui large header">App Config</div>
+                <div id="server_config"></div>
+                <div class="ui basic segment right floated" id="serverConfigBtns">
+                    <div class="ui green button" id="saveServerConfig">Save</div>
+                </div>
+            </div>
+
+            <div class="ui basic segment ui_pane" id="paneConsole">
+                <div class="ui large header">PixelWeb Status</div>
+                <div class="ui feed" id="statusFeed">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="ui basic small modal" id="BPError">
+        <div class="header">BiblioPixel Error</div>
+        <div class="image content">
+            <img class="image"><i class="huge red warning sign icon"></i></img>
+            <p class="" id="bpErrorMsg"></p>
+        </div>
+        <div class="actions">
+            <div class="ui approve green button">OK</div>
+        </div>
+    </div>
+
+    <div class="ui basic small modal" id="savePresetModal">
+        <div class="header">Save Preset</div>
+        <div class="ui content">
+            <div class="ui fluid labeled input ui_input">
+                <div class="ui label">Preset Name</div>
+                <input type="text" id="savePresetName">
+            </div>
+            <div class="ui fluid labeled input">
+                <div class="ui label">Description</div>
+                <input type="text" id="savePresetDesc">
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui approve green button" id="presetSaveBtn">Save</div>
+            <div class="ui deny red button">Cancel</div>
+        </div>
+    </div>
+
+    <div class="ui basic small modal" id="saveQueueModal">
+        <div class="header">Save Queue</div>
+        <div class="ui content">
+            <div class="ui fluid labeled input ui_input">
+                <div class="ui label">Queue Name</div>
+                <input type="text" id="saveQueueName">
+            </div>
+            <div class="ui fluid labeled input">
+                <div class="ui label">Description</div>
+                <input type="text" id="saveQueueDesc">
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui approve green button" id="queueSaveBtn">Save</div>
+            <div class="ui deny red button">Cancel</div>
+        </div>
+    </div>
+
+    <div class="ui basic small modal" id="saveQSModal">
+        <div class="header">Save Quick Select</div>
+        <div class="ui content">
+            <div class="ui fluid labeled input ui_input">
+                <div class="ui label">Name</div>
+                <input type="text" id="saveQSName">
+            </div>
+            <div class="ui fluid labeled input">
+                <div class="ui label">Description</div>
+                <input type="text" id="saveQSDesc">
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui approve green button">Save</div>
+            <div class="ui deny red button">Cancel</div>
+        </div>
+    </div>
+
+    <div class="ui basic small modal" id="deletePresetModal">
+        <div class="header">Delete Preset</div>
+        <div class="ui content" id="deletePresetMsg">
+
+        </div>
+        <div class="actions">
+            <div class="ui approve green button">Yes</div>
+            <div class="ui deny red button">No</div>
+        </div>
+    </div>
+
+    <div class="ui basic small modal" id="deleteQueueModal">
+        <div class="header">Delete Queue</div>
+        <div class="ui content" id="deleteQueueMsg">
+
+        </div>
+        <div class="actions">
+            <div class="ui approve green button">Yes</div>
+            <div class="ui deny red button">No</div>
+        </div>
+    </div>
+
+    <div class="ui basic small modal" id="deleteQSModal">
+        <div class="header">Delete Quick Select</div>
+        <div class="ui content" id="deleteQSMsg">
+
+        </div>
+        <div class="actions">
+            <div class="ui approve green button">Yes</div>
+            <div class="ui deny red button">No</div>
+        </div>
+    </div>
+
+    <div class="ui basic small modal" id="genericWarning">
+        <div class="header" id="warnHeader">Unable to Delete</div>
+        <div class="image content">
+            <img class="image"><i class="huge yellow warning circle icon"></i></img>
+            <p id="warnMsg"></p>
+        </div>
+        <div class="actions">
+            <div class="ui approve green button">OK</div>
+        </div>
+    </div>
+
+    <div class="ui basic small modal" id="needConfigModal">
+        <div class="header">Configuration Required</div>
+        <div class="image content">
+            <img class="image"><i class="huge yellow warning circle icon"></i></img>
+            <p>Please configure and run the output before continuing.</p>
+        </div>
+        <div class="actions">
+            <div class="ui approve green button">OK</div>
+        </div>
+    </div>
+
+    <div class="ui basic small modal" id="restartServerModal">
+        <div class="header">Server Restart Required</div>
+        <div class="image content">
+            <img class="image"><i class="huge yellow warning circle icon"></i></img>
+            <p>Please restart the server to ensure all changes take effect!</p>
+        </div>
+        <div class="actions">
+            <div class="ui approve green button">OK</div>
+        </div>
+    </div>
+
+    <div class="ui basic small modal" id="addQueueModal">
+        <div class="header" id="addQueueHeader">Add to Queue</div>
+        <div class="ui content">
+            <div class="ui fluid labeled input">
+                <div class="ui label">Description</div>
+                <input type="text" id="addQueueDesc">
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui approve green button" id="addQueueBtn">Add</div>
+            <div class="ui deny red button">Cancel</div>
+        </div>
+    </div>
+
+    <div class="ui basic small modal" id="addQSModal">
+        <div class="header" id="addQSHeader">Add to Quick Select</div>
+        <div class="ui content">
+            <div class="ui fluid labeled input ui_input">
+                <div class="ui label">Name</div>
+                <input type="text" id="addQSName">
+            </div>
+            <div class="ui fluid labeled input">
+                <div class="ui label">Description</div>
+                <input type="text" id="addQSDesc">
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui approve green button" id="addQSBtn">Add</div>
+            <div class="ui deny red button">Cancel</div>
+        </div>
+    </div>
+</body>
+
+</html>
