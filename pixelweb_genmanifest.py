@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+
 import inspect
 
 from bibliopixel import *
