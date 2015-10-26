@@ -2,7 +2,7 @@ import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 min_bp_ver = (2,0,0)
-min_serial_ver = (2,6)
+min_serial_ver = (2,7)
 
 import sys
 if sys.version_info[:3] < (2, 7):
