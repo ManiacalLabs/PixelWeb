@@ -59,6 +59,7 @@ def runBootstrap(upgrade = False):
             import bibliopixel
             if not checkBPVersion(bibliopixel.VERSION):
                 doInstall("BiblioPixel")
+                reload(bibliopixel)
         except:
             doInstall("BiblioPixel")
 
@@ -71,6 +72,7 @@ def runBootstrap(upgrade = False):
             import serial
             if not checkSerialVersion(serial.VERSION):
                 doInstall("pyserial")
+                reload(serial)
         except:
             doInstall("pyserial")
 
