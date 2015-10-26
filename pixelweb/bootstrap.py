@@ -2,6 +2,7 @@ import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 min_bp_ver = (2,0,0)
+min_serial_ver = (2,6)
 
 import sys
 if sys.version_info[:3] < (2, 7):
@@ -40,6 +41,10 @@ def checkBPVersion(ver):
     ver = tuple([int(i) for i in ver.split('.')])
     return ver >= min_bp_ver
 
+def checkSerialVersion(ver):
+    ver = tuple([int(i) for i in ver.split('.')])
+    return ver >= min_serial_ver
+
 def runBootstrap(upgrade = False):
     upgrade = ("--update-depends" in sys.argv)
     up_bpa = ("--update-bpa" in sys.argv)
@@ -64,6 +69,8 @@ def runBootstrap(upgrade = False):
 
         try:
             import serial
+            if not checkSerialVersion(serial.VERSION):
+                doInstall("pyserial")
         except:
             doInstall("pyserial")
 
