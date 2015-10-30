@@ -32,4 +32,5 @@ drivers = [
 moduleList = []
 moduleList.extend(controllers)
 moduleList.extend(drivers)
-moduleList.remove(None)
+if None in moduleList:
+	moduleList.remove(None)
