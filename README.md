@@ -2,7 +2,9 @@ PixelWeb is a dynamic graphical interface for our super flexible animation SDK, 
 
 ## Installation
 
-*Note: Manual install is possible but using pip is highly recommended and all that will be covered in the documentation. Also, Windows users should exclude "sudo" from all commands.*
+*Note: Manual install is possible but using pip is highly recommended and all that will be covered in the documentation. Also, Windows users should exclude "sudo" from all commands.
+
+PixelWeb Requires Python 2.7 and is not compatbile with Python 3.x. If you do not have Python installed or are unsure, visit [python.org/downloads](http://python.org/downloads) and follow the instructions.*
 
 Installing PixelWeb is easy:
 ```
