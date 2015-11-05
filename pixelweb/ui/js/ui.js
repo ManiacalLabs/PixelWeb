@@ -476,7 +476,7 @@ $.fn._input_multi = function(config) {
             </div>\
             ';
 
-        html = strReplace(html, "@placeholder", config.placeholder);
+        html = strReplace(html, "@placeholder", cfg.placeholder);
         html = strReplace(html, "@id", $node.attr('id'));
         var _guid = guid();
         html = strReplace(html, "@guid", _guid);
