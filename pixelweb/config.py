@@ -49,8 +49,7 @@ BASE_SERVER_CONFIG = d({
                 "default": 10,
                 "min": 0,
                 "max": 3600,
-                "help":"Keep display off when not running an animation by actively turning all pixels off every X seconds. Set to 0 to disable.",
-                "replace": {"\\":"/"}
+                "help":"Keep display off when not running an animation by actively turning all pixels off every X seconds. Set to 0 to disable."
             },]
         });
 
