@@ -3,7 +3,7 @@ import inspect
 
 from bibliopixel import *
 from bibliopixel.animation import *
-import pixelweb.loader
+import pixelweb.loader as loader
 from pixelweb.util import d
 # import config
 import os, sys
