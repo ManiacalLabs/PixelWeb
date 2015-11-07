@@ -55,14 +55,14 @@ for root, dirs, files in os.walk("./pixelweb/ui"):
 
 setup(
     name='PixelWeb',
-    version='1.0b4',
+    version='1.0b5',
     description='PixelWeb is a flexible web-based UI for BiblioPixel',
     author='Adam Haile',
     author_email='adam@maniacallabs.com',
     url='http://github.com/maniacallabs/pixelweb/',
     license='MIT',
     packages=['pixelweb'],
-    scripts=['run-pixelweb', 'pixelweb_genmanifest.py'],
+    scripts=['run-pixelweb', 'pixelweb_genmanifest'],
     package_data = {'pixelweb' : data_dirs},
     cmdclass = {'install_scripts': do_install_scripts},
     classifiers = [
