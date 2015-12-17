@@ -26,7 +26,8 @@ def runCommand(cmd):
 _bootstrap_installs = {
     "BiblioPixel": "pip install BiblioPixel --upgrade",
     "BiblioPixelAnimations": "pip install https://github.com/ManiacalLabs/BiblioPixelAnimations/archive/master.zip --upgrade",
-    "pyserial": "pip install pyserial --upgrade"
+    "pyserial": "pip install pyserial --upgrade",
+    "cherrypy": "pip install cherrypy --upgrade"
 }
 
 def doInstall(mod):
@@ -75,6 +76,11 @@ def runBootstrap(upgrade = False):
                 reload(serial)
         except:
             doInstall("pyserial")
+
+        # try:
+        #     import cherrypy
+        # except:
+        #     doInstall("cherrypy")
 
     try:
         import bibliopixel

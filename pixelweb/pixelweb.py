@@ -130,7 +130,15 @@ def startServer():
 
             app = default_app()
             setupRouting(app)
-            globals._server_obj = StoppableServer(host=host, port=globals._server_config.port)
+            server = "wsgiref"
+            try:
+                import cherrypy
+                server = "cherrypy"
+                print "Using CherryPy for Server"
+            except:
+                pass
+
+            globals._server_obj = StoppableServer(host=host, port=globals._server_config.port, server=server)
             globals._running = False
             app.run(server=globals._server_obj)
         except Exception, e:
