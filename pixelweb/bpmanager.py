@@ -298,7 +298,8 @@ class BPManager:
 						fps = r.fps,
 						max_steps = r.max_steps,
 						untilComplete = r.untilComplete,
-						max_cycles = r.max_cycles)
+						max_cycles = r.max_cycles,
+                        seconds = r.seconds)
 				status.pushStatus("Starting Animation Queue")
 				self.anim.run(**(run))
 				return success()

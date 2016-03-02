@@ -3,7 +3,7 @@ html {
 }
 
 .loaded_style {
-    background-color: #FF4800;
+    background-color: #F36926;
 }
 
 body {
@@ -133,3 +133,14 @@ a {
 .largeFont {
     font-size: 1.8em;
 }
+
+
+/*Simple Pane*/
+#simpleSegment {
+    width: 320px;
+}
+
+#simpleSegment > .header {
+    margin-top: 0.4rem;
+}
+/*End Simple Pane*/

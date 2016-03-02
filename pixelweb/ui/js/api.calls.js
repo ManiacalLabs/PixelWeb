@@ -113,3 +113,12 @@ function deleteQS(name, callback) {
         if (callback) callback();
     });
 }
+
+function setBrightness(level, callback) {
+    callAPI({
+        action: "setBrightness",
+        level: level
+    }, function(result) {
+        if (callback) callback();
+    });
+}

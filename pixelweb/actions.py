@@ -39,8 +39,6 @@ def setColor(req):
 def setBrightness(req):
 	try:
 		bpm.led.setMasterBrightness(req['level'])
-		bpm.led.fill(fillColor)
-		bpm.led.update()
 	except Exception, e:
 		return fail(traceback.format_exc(), error=ErrorCode.BP_ERROR, data=None)
 	return success(None)

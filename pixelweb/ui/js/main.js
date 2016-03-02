@@ -758,6 +758,7 @@ function _finalLoad(){
     $('#main_window').show();
     reloadQueues();
     reloadQS();
+    init_simple();
     if(_checkRunning()){
         activatePane("Anim");
         setTimeout(hideLoader, 250);
@@ -839,11 +840,11 @@ function onQSChange(val){
 
 function showAddQueueModal() {
     var params = getAnimConfig();
-    if (!params.run.untilComplete && params.run.max_steps == 0) {
+    if (!params.run.untilComplete && !params.run.max_steps && !params.run.seconds) {
         showWarning("Add to Queue Warning",
             'Queued animations require a stop condition, otherwise the animation will run forever.<br/>\
-             Please either set Max Frames or Until Complete and Max Cycles.<br \>\
-             Note: Not all animations support Until Complete but Max Frames will always work.')
+             Please either set Max Frames, Run Seconds, or Until Complete and Max Cycles.<br \>\
+             Note: Not all animations support Until Complete but Max Frames or Run Seconds will always work.')
     } else {
         if (_animEditMode) {
             $("#addQueueHeader").html("Edit Queue Item");
@@ -1107,4 +1108,5 @@ $(document)
 
         $("#launchQS").click(launchQS);
 
+        $( "#paneSimple" ).load( "simple.html" );
     });
