@@ -111,17 +111,19 @@ $.fn._dropdown = function(config) {
         if(! $node.data()) return null;
         var cfg = $node.data().config;
         if (value != null) {
-            if(cfg.data_map) {
-                var val = JSON.stringify(value);
-                $.each(cfg.data_map, function(i,v){
-                    if(val == JSON.stringify(v)) {
-                        value = i;
-                        return false;
-                    }
-                })
-            }
-            value = value.toString();
-            return $node.children(".dropdown").dropdown("set selected", value);
+            setTimeout(function(){
+                if(cfg.data_map) {
+                    var val = JSON.stringify(value);
+                    $.each(cfg.data_map, function(i,v){
+                        if(val == JSON.stringify(v)) {
+                            value = i;
+                            return false;
+                        }
+                    })
+                }
+                value = value.toString();
+                return $node.children(".dropdown").dropdown("set selected", value);
+            }, 10);
         } else {
             var v = $node.children(".dropdown").dropdown("get value");
             if(typeof v == "object") v = null;

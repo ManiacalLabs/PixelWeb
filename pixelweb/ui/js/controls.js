@@ -202,6 +202,7 @@ $.fn._multi = function(config) {
 
 
         if (def) {
+            console.log(config.default);
             $node.val(config.default);
         }
     }
