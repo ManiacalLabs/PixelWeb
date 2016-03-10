@@ -1,7 +1,7 @@
 import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-min_bp_ver = (2,0,5)
+min_bp_ver = (2,0,9)
 min_serial_ver = (2,7)
 
 import sys
