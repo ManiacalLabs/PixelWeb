@@ -758,7 +758,7 @@ function _finalLoad(){
     $('#main_window').show();
     reloadQueues();
     reloadQS();
-    init_simple();
+    // init_simple();
     if(_checkRunning()){
         activatePane("Anim");
         setTimeout(hideLoader, 250);
