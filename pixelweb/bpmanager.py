@@ -57,7 +57,7 @@ class BPManager:
 		for p in config.presets:
 			p.id = config.id
 
-	 	c = {
+		c = {
 				"display":config.display,
 				"desc":config.desc,
 				"params":config.params,
@@ -142,8 +142,8 @@ class BPManager:
 
 	def loadMods(self):
 		mod_dirs = globals._server_config.mod_dirs
-		for dir in (mod_dirs + globals._bpa_dirs):
-			self.loadModules(loader.load_folder(dir))
+		for d in (mod_dirs + globals._bpa_dirs):
+			self.loadModules(loader.load_folder(d))
 
 	def __getInstance(self, config, inst_type):
 		config = d(config)
@@ -299,7 +299,7 @@ class BPManager:
 						max_steps = r.max_steps,
 						untilComplete = r.untilComplete,
 						max_cycles = r.max_cycles,
-                        seconds = r.seconds)
+						seconds = r.seconds)
 				status.pushStatus("Starting Animation Queue")
 				self.anim.run(**(run))
 				return success()

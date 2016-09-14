@@ -53,6 +53,10 @@ BASE_SERVER_CONFIG = d({
             },]
         });
 
+def setHome(home):
+    global __home
+    __home = home
+
 def genDefaultConfig(params):
     c = {}
     for p in params:
@@ -64,13 +68,16 @@ def genDefaultConfig(params):
 
 def initConfig():
     try:
+        print __home
         if not os.path.exists(__home):
             print "Creating {}".format(__home)
             os.makedirs(__home)
     except:
         print "Failed to initialize PixelWeb config!"
 
-def readConfig(file, key = None, path=__home):
+def readConfig(file, key = None, path=None):
+    if not path:
+        path = __home
     data = {}
     try:
         with open(path + "/" + file + ".json", "r") as fp:
@@ -85,7 +92,9 @@ def readConfig(file, key = None, path=__home):
 
     return d(data)
 
-def writeConfig(file, data, key = None, path=__home):
+def writeConfig(file, data, key = None, path=None):
+    if not path:
+        path = __home
     base = data
     if key:
         base = readConfig(file, path=path)

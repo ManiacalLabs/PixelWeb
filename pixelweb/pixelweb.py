@@ -102,6 +102,7 @@ def startup():
     bpa_path = os.path.dirname(os.path.abspath(BiblioPixelAnimations.__file__)).replace("\\", "/")
     bpa_matrix = bpa_path + "/matrix/"
     bpa_strip = bpa_path + "/strip/"
+    bpa_recv = bpa_path + "/receivers/"
 
     status.pushStatus("Starting PixelWeb Server")
     config.initConfig()
@@ -111,15 +112,22 @@ def startup():
     # if(bpa_matrix not in cfg.mod_dirs): cfg.mod_dirs.append(bpa_matrix)
     # if(bpa_strip not in cfg.mod_dirs): cfg.mod_dirs.append(bpa_strip)
 
-    globals._bpa_dirs = [bpa_matrix, bpa_strip]
+    globals._bpa_dirs = [bpa_matrix, bpa_strip, bpa_recv]
 
     level = log.INFO
     if cfg.show_debug: level = log.DEBUG
     log.setLogLevel(level)
 
+    mod_dir = os.path.join(config.__home, 'mods')
+    if os.path.isdir(mod_dir):
+        globals._bpa_dirs.append(mod_dir)
+    print globals._bpa_dirs
+
     initBPM()
 
-def startServer():
+def startServer(home_dir=None):
+    if home_dir:
+        config.setHome(home_dir)
     while globals._running:
         try:
             startup()

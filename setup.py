@@ -1,5 +1,6 @@
 from __future__ import with_statement
-import os, sys
+import os
+import sys
 from os.path import join as pjoin, splitext, split as psplit
 from distutils.core import setup
 from distutils.command.install_scripts import install_scripts
@@ -7,7 +8,7 @@ from distutils.command.install import install as _install
 from distutils import log
 
 BAT_TEMPLATE = \
-r"""@echo off
+    r"""@echo off
 REM wrapper to use shebang first line of {FNAME}
 set mypath=%~dp0
 set pyscript="%mypath%{FNAME}"
@@ -22,6 +23,7 @@ call "%py_exe%" %pyscript% %*
 
 
 class do_install_scripts(install_scripts):
+
     def run(self):
         install_scripts.run(self)
         if not os.name == "nt":
@@ -34,7 +36,7 @@ class do_install_scripts(install_scripts):
             if not (first_line.startswith('#!') and
                     'python' in first_line.lower()):
                 log.info("No #!python executable found, skipping .bat "
-                            "wrapper")
+                         "wrapper")
                 continue
             pth, fname = psplit(filepath)
             froot, ext = splitext(fname)
@@ -49,7 +51,7 @@ class do_install_scripts(install_scripts):
 
 data_dirs = []
 for root, dirs, files in os.walk("./pixelweb/ui"):
-    base = root.replace("\\","/").replace("./pixelweb/", "")
+    base = root.replace("\\", "/").replace("./pixelweb/", "")
     for f in files:
         data_dirs.append(base + "/" + f)
 
@@ -63,13 +65,13 @@ setup(
     license='MIT',
     packages=['pixelweb'],
     scripts=['run-pixelweb', 'pixelweb_genmanifest'],
-    package_data = {'pixelweb' : data_dirs},
-    cmdclass = {'install_scripts': do_install_scripts},
-    classifiers = [
+    package_data={'pixelweb': data_dirs},
+    cmdclass={'install_scripts': do_install_scripts},
+    classifiers=[
         'Development Status :: 4 - Beta',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
-        ],
-    )
+    ],
+)
