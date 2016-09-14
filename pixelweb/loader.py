@@ -57,13 +57,15 @@ def load_folder(dir):
     mods = []
     status.pushStatus("Scanning: {}".format(dir))
 
-    # for p in glob.glob(dir + "/*/"):
-    #     base = p.replace("\\", "").replace("/", "")
-    #     base = base.replace(dir.replace("\\", "").replace("/", ""), "")
-    #     package = load_package(dir, base)
-    #     if package:
-    #         hash, pack = package
-    #         mods[hash] = pack
+    for p in glob.glob(dir + "/*/"):
+        base = p.replace("\\", "").replace("/", "")
+        base = base.replace(dir.replace("\\", "").replace("/", ""), "")
+        package = load_package(dir, base)
+        if package:
+            hash, pack = package
+            if pack:
+                mods.append(pack)
+            # mods[hash] = pack
 
     for m in glob.glob(dir + "/*.py"):
         hash, mod = load_module(m)

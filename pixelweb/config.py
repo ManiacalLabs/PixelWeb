@@ -68,7 +68,6 @@ def genDefaultConfig(params):
 
 def initConfig():
     try:
-        print __home
         if not os.path.exists(__home):
             print "Creating {}".format(__home)
             os.makedirs(__home)

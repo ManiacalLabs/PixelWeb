@@ -121,7 +121,6 @@ def startup():
     mod_dir = os.path.join(config.__home, 'mods')
     if os.path.isdir(mod_dir):
         globals._bpa_dirs.append(mod_dir)
-    print globals._bpa_dirs
 
     initBPM()
 
