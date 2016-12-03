@@ -20,13 +20,19 @@ if len(glob.glob("/dev/spi*")) > 0:
 else:
 	APA102 = LPD8806 = WS2801 = None
 
+try:
+	import bibliopixel.drivers.PiWS281X as PiWS281X
+except:
+	PiWS281X = None
+
 drivers = [
 	visualizer,
 	serial_driver,
 	APA102,
 	LPD8806,
 	WS2801,
-	network
+	network,
+	PiWS281X
 ]
 
 moduleList = []
