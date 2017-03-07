@@ -6,6 +6,7 @@ controllers = [
 
 import bibliopixel.drivers.visualizer as visualizer
 import bibliopixel.drivers.network as network
+import bibliopixel.drivers.network_udp as network_udp
 
 try:
 	import bibliopixel.drivers.serial_driver as serial_driver
@@ -32,6 +33,7 @@ drivers = [
 	LPD8806,
 	WS2801,
 	network,
+	network_udp,
 	PiWS281X
 ]
 
