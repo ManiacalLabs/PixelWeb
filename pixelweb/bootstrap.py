@@ -25,7 +25,7 @@ def runCommand(cmd):
 
 _bootstrap_installs = {
     "BiblioPixel": 'pip install bibliopixel<3.0 --upgrade',
-    "BiblioPixelAnimations": "pip install BiblioPixelAnimations==3.20170529.145009 --upgrade",
+    "BiblioPixelAnimations": "pip install BiblioPixelAnimations==3.20170531.153148 --upgrade",
     "pyserial": "pip install pyserial --upgrade",
     "cherrypy": "pip install cherrypy --upgrade"
 }
