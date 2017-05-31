@@ -57,7 +57,7 @@ for root, dirs, files in os.walk("./pixelweb/ui"):
 
 setup(
     name='PixelWeb',
-    version='1.1.4',
+    version='1.1.5',
     description='PixelWeb is a flexible web-based UI for BiblioPixel',
     author='Adam Haile',
     author_email='adam@maniacallabs.com',
