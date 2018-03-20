@@ -1,3 +1,5 @@
+**NOTE:** PixelWeb is no longer actively supported as we dropped support in [BiblioPixel](http://github.com/maniacallabs/BiblioPixel) starting with BiblioPixel v3.0. Simply not enough users showed interest PixelWeb, so when making the v2.x to v3.0 transition for BiblioPixel it was decided to not worry about maintaining compatibility. However, you can still use PixelWeb with Python 2.7 by following the instructions below.
+
 PixelWeb is a dynamic graphical interface for our super flexible animation SDK, [BiblioPixel](http://github.com/maniacallabs/BiblioPixel). It runs everywhere BiblioPixel does and provides an easy to use web-based interface to nearly everything BiblioPixel can do. This not only allows local system control but via any other computer on the same network<sup>&dagger;</sup>.  
 
 ## Installation
